@@ -4,24 +4,34 @@
  */
 package domain;
 
-import org.javalite.activejdbc.Model;
+import records.informationsRecord;
 
 /**
  *
  * @author hamednajafi
  */
-public class Informations extends Model{
+public class Informations {
+    
+    informationsRecord theR;
+    
+    public Informations(){
+        this(new informationsRecord());
+    }
+    
+    public Informations(informationsRecord theR){
+        this.theR = theR;
+    }
     
    public Integer getGameId(){
-       return getInteger("game_id");
+       return theR.getInteger("game_id");
    }
     
    public String getPlaceName(){
-       return getString("place");
+       return theR.getString("place");
    }
    
    public String getArenaName(){
-       return getString("arena");
+       return theR.getString("arena");
    }
     
 }

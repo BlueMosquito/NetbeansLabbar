@@ -4,10 +4,12 @@
  */
 package records;
 
+import org.javalite.activejdbc.Model;
+
 /**
  *
  * @author hamednajafi
  */
-public class gamesRecord {
+public class gamesRecord extends Model{
     
 }

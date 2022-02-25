@@ -4,17 +4,28 @@
  */
 package domain;
 
-import org.javalite.activejdbc.Model;
+import records.LeaguesRecord;
 
 /**
  *
  * @author hamednajafi
  */
 
-public class Leagues extends Model{  
+public class Leagues {
+    
+    private final LeaguesRecord theR;
+    
+    public Leagues(){
+        this(new LeaguesRecord());
+        
+    }
+    
+    public Leagues(LeaguesRecord theR){
+        this.theR = theR;
+    }
             
     public String getName(){
-        return getString("leagueName");
+        return theR.getString("leagueName");
     }
     
 }
