@@ -4,17 +4,28 @@
  */
 package domain;
 
-import org.javalite.activejdbc.Model;
+import records.teamsRecord;
 
 /**
  *
  * @author hamednajafi
  */
-public class Teams extends Model{
+public class Teams {
+    
+    teamsRecord theR;
+    
+    public Teams(){
+        this(new teamsRecord());
+    }
+    
+    public Teams(teamsRecord theR){
+        this.theR = theR;
+    }
+    
     public Integer getGameId(){
-        return getInteger("g_id");
+        return theR.getInteger("g_id");
     }
     public String getTeamName(){
-        return getString("teamName");
+        return theR.getString("teamName");
     }
 }
