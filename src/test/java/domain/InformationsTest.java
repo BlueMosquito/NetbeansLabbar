@@ -11,6 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import records.informationsRecord;
 
 /**
  *
@@ -27,6 +32,7 @@ public class InformationsTest {
     
     @AfterAll
     public static void tearDownClass() {
+        
     }
     
     @BeforeEach
@@ -44,13 +50,18 @@ public class InformationsTest {
     public void testGetGameId() {
         DbConn.getInstance().open();
         System.out.println("getGameId");
-        Informations instance = new Informations();
+        
+        informationsRecord informationMock = mock(informationsRecord.class);
+        when(informationMock.getInteger("game_id")). thenReturn( null );
+        Informations instance = new Informations(informationMock);
+        
         Integer expResult = null;
         Integer result = instance.getGameId();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        DbConn._close();
+        
+        verify( informationMock, times( 1 )) .getInteger("game_id");
+        
+        DbConn.getInstance().close();
     }
 
     /**
@@ -60,13 +71,18 @@ public class InformationsTest {
     public void testGetPlaceName() {
         DbConn.getInstance().open();
         System.out.println("getPlaceName");
-        Informations instance = new Informations();
+        
+        informationsRecord informationMock = mock(informationsRecord.class);
+        when(informationMock.getString("place")). thenReturn( "" );
+        
+        Informations instance = new Informations(informationMock);
         String expResult = "";
         String result = instance.getPlaceName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        DbConn._close();
+        
+        verify( informationMock, times( 1 )) .getString("place");
+        
+        DbConn.getInstance().close();
     }
 
     /**
@@ -76,13 +92,18 @@ public class InformationsTest {
     public void testGetArenaName() {
         DbConn.getInstance().open();
         System.out.println("getArenaName");
-        Informations instance = new Informations();
+        
+        informationsRecord informationMock = mock(informationsRecord.class);
+        when(informationMock.getString("arena")). thenReturn( "" );
+        
+        Informations instance = new Informations(informationMock);
         String expResult = "";
         String result = instance.getArenaName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        DbConn._close();
+        
+        verify( informationMock, times( 1 )) .getString("arena");
+        
+        DbConn.getInstance().close();
     }
     
 }

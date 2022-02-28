@@ -5,11 +5,17 @@
 package records;
 
 import org.javalite.activejdbc.Model;
+import org.javalite.activejdbc.annotations.BelongsTo;
+import org.javalite.activejdbc.annotations.IdName;
+import org.javalite.activejdbc.annotations.Table;
 
 /**
  *
  * @author hamednajafi
  */
+@Table("informations")
+@IdName("id")
+@BelongsTo(parent = gamesRecord.class, foreignKeyName = "game_id")
 public class informationsRecord extends Model{
     
 }

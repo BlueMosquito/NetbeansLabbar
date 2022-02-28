@@ -11,6 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import records.gamesRecord;
 
 /**
  *
@@ -23,10 +28,12 @@ public class GamesTest {
     
     @BeforeAll
     public static void setUpClass() {
+        
     }
     
     @AfterAll
     public static void tearDownClass() {
+        
     }
     
     @BeforeEach
@@ -44,13 +51,18 @@ public class GamesTest {
     public void testGetSeason() {
         DbConn.getInstance().open();
         System.out.println("getSeason");
-        Games instance = new Games();
+        
+        gamesRecord gameMock = mock(gamesRecord.class);
+        when(gameMock.getInteger("season_id")). thenReturn( null );
+        
+        Games instance = new Games(gameMock);
         Integer expResult = null;
         Integer result = instance.getSeason();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        DbConn._close();
+        
+        verify( gameMock, times( 1 )) .getInteger("season_id");
+        
+        DbConn.getInstance().close();
     }
 
     /**
@@ -60,13 +72,18 @@ public class GamesTest {
     public void testGetGameName() {
         DbConn.getInstance().open();
         System.out.println("getGameName");
-        Games instance = new Games();
+        
+        gamesRecord gameMock = mock(gamesRecord.class);
+        when(gameMock.getString("gameName")). thenReturn( "" );
+        
+        Games instance = new Games(gameMock);
         String expResult = "";
         String result = instance.getGameName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        DbConn._close();
+        
+        verify( gameMock, times( 1 )) .getString("gameName");
+        
+        DbConn.getInstance().close();
     }
     
 }

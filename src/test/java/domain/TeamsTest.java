@@ -10,7 +10,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import records.teamsRecord;
 
 /**
  *
@@ -23,10 +27,12 @@ public class TeamsTest {
     
     @BeforeAll
     public static void setUpClass() {
+        
     }
     
     @AfterAll
     public static void tearDownClass() {
+        
     }
     
     @BeforeEach
@@ -44,13 +50,17 @@ public class TeamsTest {
     public void testGetGameId() {
         DbConn.getInstance().open();
         System.out.println("getGameId");
-        Teams instance = new Teams();
+        
+        teamsRecord teamMock = mock(teamsRecord.class);
+        when(teamMock.getInteger("g_id")). thenReturn( null );
+        
+        Teams instance = new Teams(teamMock);
         Integer expResult = null;
         Integer result = instance.getGameId();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        DbConn._close();
+        
+        verify( teamMock, times( 1 )) .getInteger("g_id");
+        
+        DbConn.getInstance().close();
     }
 
     /**
@@ -60,13 +70,17 @@ public class TeamsTest {
     public void testGetTeamName() {
         DbConn.getInstance().open();
         System.out.println("getTeamName");
-        Teams instance = new Teams();
+        
+        teamsRecord teamMock = mock(teamsRecord.class);
+        when(teamMock.getString("teamName")). thenReturn( "" );
+        
+        Teams instance = new Teams(teamMock);
         String expResult = "";
         String result = instance.getTeamName();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        DbConn._close();
+        
+        verify( teamMock, times( 1 )) .getString("teamName");
+        
+        DbConn.getInstance().close();
     }
     
 }

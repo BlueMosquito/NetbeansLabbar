@@ -11,6 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import records.seasonsRecord;
 
 /**
  *
@@ -23,10 +28,12 @@ public class SeasonsTest {
     
     @BeforeAll
     public static void setUpClass() {
+        
     }
     
     @AfterAll
     public static void tearDownClass() {
+
     }
     
     @BeforeEach
@@ -44,13 +51,18 @@ public class SeasonsTest {
     public void testGetName() {
         DbConn.getInstance().open();
         System.out.println("getName");
-        Seasons instance = new Seasons();
+        
+        seasonsRecord seasonMock = mock(seasonsRecord.class);
+        when(seasonMock.getString("seasonName")). thenReturn( "" );
+        Seasons instance = new Seasons(seasonMock);
+        
         String expResult = "";
         String result = instance.getName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        DbConn._close();
+        
+        verify( seasonMock, times( 1 )) .getString("seasonName");
+        
+        DbConn.getInstance().close();
     }
 
     /**
@@ -60,13 +72,19 @@ public class SeasonsTest {
     public void testGetLeagueId() {
         DbConn.getInstance().open();
         System.out.println("getLeagueId");
-        Seasons instance = new Seasons();
+        
+        seasonsRecord seasonMock = mock(seasonsRecord.class);
+        when(seasonMock.getInteger("league_id")). thenReturn( null );
+        
+        Seasons instance = new Seasons(seasonMock);
+        
         Integer expResult = null;
         Integer result = instance.getLeagueId();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        DbConn._close();
+        
+        verify( seasonMock, times( 1 )) .getInteger("league_id");
+        
+        DbConn.getInstance().close();
     }
     
 }

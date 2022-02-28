@@ -11,6 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import records.LeaguesRecord;
 
 /**
  *
@@ -23,10 +28,12 @@ public class LeaguesTest {
     
     @BeforeAll
     public static void setUpClass() {
+        
     }
     
     @AfterAll
     public static void tearDownClass() {
+        
     }
     
     @BeforeEach
@@ -44,13 +51,18 @@ public class LeaguesTest {
     public void testGetName() {
         DbConn.getInstance().open();
         System.out.println("getName");
-        Leagues instance = new Leagues();
+        LeaguesRecord leaguesMock = mock(LeaguesRecord.class);
+        when(leaguesMock.getString("leagueName")). thenReturn( "" );
+        
+        Leagues instance = new Leagues(leaguesMock);
+        
         String expResult = "";
         String result = instance.getName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        DbConn._close();
+        
+        verify( leaguesMock, times( 1 )) .getString("leagueName");
+        
+        DbConn.getInstance().close();
     }
     
 }

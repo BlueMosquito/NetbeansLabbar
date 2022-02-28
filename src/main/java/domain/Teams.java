@@ -12,7 +12,7 @@ import records.teamsRecord;
  */
 public class Teams {
     
-    teamsRecord theR;
+    private final teamsRecord theR;
     
     public Teams(){
         this(new teamsRecord());
