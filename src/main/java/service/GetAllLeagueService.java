@@ -4,11 +4,8 @@
  */
 package service;
 
-import db.DbConn;
 import domain.Leagues;
-import java.util.ArrayList;
 import java.util.List;
-import records.LeaguesRecord;
 
 /**
  *
@@ -16,15 +13,8 @@ import records.LeaguesRecord;
  */
 public class GetAllLeagueService {
     public List<Leagues> execute(){
-        DbConn._open();
-        List<LeaguesRecord> leaguesRecordList = LeaguesRecord.findAll();
-        
-        List<Leagues> leaguesList = new ArrayList();
-        for(LeaguesRecord record : leaguesRecordList){
-            leaguesList.add(new Leagues(record));
-        }
-        
-        DbConn._close();
-        return leaguesList;
+        Leagues league = new Leagues();
+       
+        return league.getAllLeagues();
     }
 }
