@@ -15,7 +15,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import records.seasonsRecord;
+import records.SeasonsRecord;
 
 /**
  *
@@ -52,7 +52,7 @@ public class SeasonsTest {
         DbConn.getInstance().open();
         System.out.println("getName");
         
-        seasonsRecord seasonMock = mock(seasonsRecord.class);
+        SeasonsRecord seasonMock = mock(SeasonsRecord.class);
         when(seasonMock.getString("seasonName")). thenReturn( "" );
         Seasons instance = new Seasons(seasonMock);
         
@@ -73,7 +73,7 @@ public class SeasonsTest {
         DbConn.getInstance().open();
         System.out.println("getLeagueId");
         
-        seasonsRecord seasonMock = mock(seasonsRecord.class);
+        SeasonsRecord seasonMock = mock(SeasonsRecord.class);
         when(seasonMock.getInteger("league_id")). thenReturn( null );
         
         Seasons instance = new Seasons(seasonMock);

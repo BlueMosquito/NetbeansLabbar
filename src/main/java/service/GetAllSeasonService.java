@@ -4,11 +4,10 @@
  */
 package service;
 
-import db.DbConn;
 import domain.Seasons;
-import java.util.ArrayList;
 import java.util.List;
-import records.seasonsRecord;
+import java.util.stream.Collectors;
+import records.SeasonsRecord;
 
 /**
  *
@@ -17,15 +16,12 @@ import records.seasonsRecord;
 public class GetAllSeasonService {
 
     public List<Seasons> execute() {
-        DbConn._open();
-        List<seasonsRecord> seasonRecordList = seasonsRecord.findAll();
         
-        List<Seasons> seasonList = new ArrayList();
-        for(seasonsRecord record : seasonRecordList){
-            seasonList.add(new Seasons(record));
-        }
-        DbConn._close();
-        return seasonList;
+        
+        List<SeasonsRecord> seasonRecordList = SeasonsRecord.findAll();
+        
+        return seasonRecordList.stream().map((r)-> new Seasons(r)).collect(Collectors.toList());
+        
     }
 
 }

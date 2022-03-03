@@ -4,11 +4,10 @@
  */
 package service;
 
-import db.DbConn;
 import domain.Games;
-import java.util.ArrayList;
 import java.util.List;
-import records.gamesRecord;
+import java.util.stream.Collectors;
+import records.GamesRecord;
 
 /**
  *
@@ -16,14 +15,9 @@ import records.gamesRecord;
  */
 public class GetAllGameService {
     public List<Games> execute(){
-        DbConn._open();
-        List<gamesRecord> gameRecordList = gamesRecord.findAll();
         
-        List<Games> gameList = new ArrayList();
-        for(gamesRecord record : gameRecordList){
-            gameList.add(new Games(record));
-        }
-        DbConn._close();
-        return gameList;
+        List<GamesRecord> gameRecordList = GamesRecord.findAll();
+
+        return gameRecordList.stream().map((r)-> new Games(r)).collect(Collectors.toList());
     }
 }

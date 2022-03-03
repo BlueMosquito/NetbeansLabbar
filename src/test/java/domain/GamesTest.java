@@ -15,7 +15,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import records.gamesRecord;
+import records.GamesRecord;
 
 /**
  *
@@ -52,7 +52,7 @@ public class GamesTest {
         DbConn.getInstance().open();
         System.out.println("getSeason");
         
-        gamesRecord gameMock = mock(gamesRecord.class);
+        GamesRecord gameMock = mock(GamesRecord.class);
         when(gameMock.getInteger("season_id")). thenReturn( null );
         
         Games instance = new Games(gameMock);
@@ -73,7 +73,7 @@ public class GamesTest {
         DbConn.getInstance().open();
         System.out.println("getGameName");
         
-        gamesRecord gameMock = mock(gamesRecord.class);
+        GamesRecord gameMock = mock(GamesRecord.class);
         when(gameMock.getString("gameName")). thenReturn( "" );
         
         Games instance = new Games(gameMock);

@@ -15,7 +15,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import records.informationsRecord;
+import records.InformationsRecord;
 
 /**
  *
@@ -51,7 +51,7 @@ public class InformationsTest {
         DbConn.getInstance().open();
         System.out.println("getGameId");
         
-        informationsRecord informationMock = mock(informationsRecord.class);
+        InformationsRecord informationMock = mock(InformationsRecord.class);
         when(informationMock.getInteger("game_id")). thenReturn( null );
         Informations instance = new Informations(informationMock);
         
@@ -72,7 +72,7 @@ public class InformationsTest {
         DbConn.getInstance().open();
         System.out.println("getPlaceName");
         
-        informationsRecord informationMock = mock(informationsRecord.class);
+        InformationsRecord informationMock = mock(InformationsRecord.class);
         when(informationMock.getString("place")). thenReturn( "" );
         
         Informations instance = new Informations(informationMock);
@@ -93,7 +93,7 @@ public class InformationsTest {
         DbConn.getInstance().open();
         System.out.println("getArenaName");
         
-        informationsRecord informationMock = mock(informationsRecord.class);
+        InformationsRecord informationMock = mock(InformationsRecord.class);
         when(informationMock.getString("arena")). thenReturn( "" );
         
         Informations instance = new Informations(informationMock);

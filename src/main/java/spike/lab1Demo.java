@@ -11,7 +11,7 @@ import domain.Leagues;
 import domain.Seasons;
 import domain.Teams;
 import java.util.List;
-import records.teamsRecord;
+import records.TeamsRecord;
 
 /**
  *
@@ -110,7 +110,7 @@ public class lab1Demo {
     }
 
     public static void teamTable() {
-        teamsRecord.createIt("G_id", "1", "teamName", "blablaTeam").saveIt();
+        TeamsRecord.createIt("G_id", "1", "teamName", "blablaTeam").saveIt();
         //Teams.deleteAll();
     }
 */

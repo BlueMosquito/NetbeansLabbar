@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import records.teamsRecord;
+import records.TeamsRecord;
 
 /**
  *
@@ -51,7 +51,7 @@ public class TeamsTest {
         DbConn.getInstance().open();
         System.out.println("getGameId");
         
-        teamsRecord teamMock = mock(teamsRecord.class);
+        TeamsRecord teamMock = mock(TeamsRecord.class);
         when(teamMock.getInteger("g_id")). thenReturn( null );
         
         Teams instance = new Teams(teamMock);
@@ -71,7 +71,7 @@ public class TeamsTest {
         DbConn.getInstance().open();
         System.out.println("getTeamName");
         
-        teamsRecord teamMock = mock(teamsRecord.class);
+        TeamsRecord teamMock = mock(TeamsRecord.class);
         when(teamMock.getString("teamName")). thenReturn( "" );
         
         Teams instance = new Teams(teamMock);

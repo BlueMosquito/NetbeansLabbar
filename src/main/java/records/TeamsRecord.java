@@ -13,10 +13,9 @@ import org.javalite.activejdbc.annotations.Table;
  *
  * @author hamednajafi
  */
-
-@Table("Games")
+@Table("teams")
 @IdName("id")
-@BelongsTo(parent = seasonsRecord.class, foreignKeyName = "seasons_id")
-public class gamesRecord extends Model{
+@BelongsTo(parent = GamesRecord.class, foreignKeyName = "g_id")
+public class TeamsRecord extends Model{
     
 }

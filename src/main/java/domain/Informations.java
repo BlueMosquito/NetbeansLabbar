@@ -4,7 +4,7 @@
  */
 package domain;
 
-import records.informationsRecord;
+import records.InformationsRecord;
 
 /**
  *
@@ -12,13 +12,13 @@ import records.informationsRecord;
  */
 public class Informations {
     
-    informationsRecord theR;
+    InformationsRecord theR;
     
     public Informations(){
-        this(new informationsRecord());
+        this(new InformationsRecord());
     }
     
-    public Informations(informationsRecord theR){
+    public Informations(InformationsRecord theR){
         this.theR = theR;
     }
     

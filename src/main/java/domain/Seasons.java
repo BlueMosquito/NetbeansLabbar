@@ -4,7 +4,7 @@
  */
 package domain;
 
-import records.seasonsRecord;
+import records.SeasonsRecord;
 
 /**
  *
@@ -12,13 +12,13 @@ import records.seasonsRecord;
  */
 public class Seasons {
     
-    private final seasonsRecord theR;
+    private final SeasonsRecord theR;
     
     public Seasons(){
-        this(new seasonsRecord());
+        this(new SeasonsRecord());
     }
     
-    public Seasons(seasonsRecord theR){
+    public Seasons(SeasonsRecord theR){
         this.theR = theR;
     }
     

@@ -4,7 +4,7 @@
  */
 package domain;
 
-import records.teamsRecord;
+import records.TeamsRecord;
 
 /**
  *
@@ -12,13 +12,13 @@ import records.teamsRecord;
  */
 public class Teams {
     
-    private final teamsRecord theR;
+    private final TeamsRecord theR;
     
     public Teams(){
-        this(new teamsRecord());
+        this(new TeamsRecord());
     }
     
-    public Teams(teamsRecord theR){
+    public Teams(TeamsRecord theR){
         this.theR = theR;
     }
     

@@ -4,6 +4,8 @@
  */
 package domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import records.LeaguesRecord;
 
 /**
@@ -12,6 +14,9 @@ import records.LeaguesRecord;
  */
 
 public class Leagues {
+    
+    String leagueName;
+    int leagueId;
     
     private final LeaguesRecord theR;
     
@@ -22,10 +27,16 @@ public class Leagues {
     
     public Leagues(LeaguesRecord theR){
         this.theR = theR;
+        
     }
             
     public String getName(){
         return theR.getString("leagueName");
+    }
+    
+    public List<Leagues> getAllLeagues(){
+        List<LeaguesRecord> leaguesRecordList = LeaguesRecord.findAll();
+        return leaguesRecordList.stream().map((r)-> new Leagues(r)).collect(Collectors.toList());
     }
     
 }

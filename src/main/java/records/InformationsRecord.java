@@ -15,7 +15,7 @@ import org.javalite.activejdbc.annotations.Table;
  */
 @Table("informations")
 @IdName("id")
-@BelongsTo(parent = gamesRecord.class, foreignKeyName = "game_id")
-public class informationsRecord extends Model{
+@BelongsTo(parent = GamesRecord.class, foreignKeyName = "game_id")
+public class InformationsRecord extends Model{
     
 }

@@ -4,13 +4,21 @@
  */
 package spike;
 
+import db.DbConn;
 import domain.Games;
+import domain.Informations;
 import domain.Leagues;
 import domain.Seasons;
+import domain.Teams;
 import java.util.List;
+import service.CreateNewSeasonService;
+import service.GetAllArenaService;
 import service.GetAllGameService;
 import service.GetAllLeagueService;
+import service.GetAllSeasonByLeagueIdService;
 import service.GetAllSeasonService;
+import service.GetAllTeamService;
+import service.GetAllArenaByGameIdService;
 
 /**
  *
@@ -19,18 +27,19 @@ import service.GetAllSeasonService;
 public class ServiceDemo {
 
     public static void main(String[] args) {
-        //testGetAllLeagueService();
+        testGetAllLeagueService();
         //testGetAllSeasonService();
-        testGetAllGameService();
+        //testGetAllGameService();
         //testGetAllTeamService();
         //testGetAllArenaService();
-        //testGetAllSeasonByLeagueService();
+        //testGetAllSeasonByLeagueIdService();
         //testGetAllArenaByGameIdService();
         //testCreateNewSeasonService();
         
     }
     
     public static void testGetAllLeagueService(){
+        DbConn.getInstance().open();
         GetAllLeagueService getAllLeagueService = new GetAllLeagueService();
 
         List<Leagues> leaguesList = getAllLeagueService.execute();
@@ -38,9 +47,11 @@ public class ServiceDemo {
         for (Leagues league : leaguesList) {
             System.out.println(league.getName());
         }
+        DbConn.getInstance().close();
     }
 
     private static void testGetAllSeasonService() {
+        DbConn.getInstance().open();
         GetAllSeasonService getAllSeasonService = new GetAllSeasonService();
         
         List<Seasons> seasonsList = getAllSeasonService.execute();
@@ -48,9 +59,11 @@ public class ServiceDemo {
         for(Seasons season : seasonsList){
             System.out.println(season.getName());
         }
+        DbConn.getInstance().close();
     }
 
     private static void testGetAllGameService() {
+        DbConn.getInstance().open();
         GetAllGameService getAllGameService = new GetAllGameService();
         
         List<Games> gameList = getAllGameService.execute();
@@ -58,27 +71,58 @@ public class ServiceDemo {
         for(Games game : gameList){
             System.out.println(game.getGameName());
         }
+        DbConn.getInstance().close();
     }
 
     private static void testGetAllTeamService() {
+        GetAllTeamService getAllTeamService = new GetAllTeamService();
         
+        List<Teams> teamList = getAllTeamService.execute();
+        
+        for(Teams team : teamList){
+            System.out.println(team.getTeamName());
+        }
     }
 
     private static void testGetAllArenaService() {
+        DbConn.getInstance().open();
+        GetAllArenaService getAllArenaService = new GetAllArenaService();
         
+        List<Informations> arenaList = getAllArenaService.execute();
+        
+        for(Informations arena : arenaList){
+            System.out.println(arena.getArenaName());
+        }
+        DbConn.getInstance().close();
     }
 
-    private static void testGetAllSeasonByLeagueService() {
+    private static void testGetAllSeasonByLeagueIdService() {
+        DbConn.getInstance().open();
+        GetAllSeasonByLeagueIdService getSeasonService = new GetAllSeasonByLeagueIdService();
         
+        List<Seasons> seasonList = getSeasonService.execute();
+        
+        for(Seasons season : seasonList){
+            System.out.println(season.getName());
+        }
+        DbConn.getInstance().close();
     }
 
     private static void testGetAllArenaByGameIdService() {
-
+        DbConn.getInstance().open();
+        
+        GetAllArenaByGameIdService getArenaService = new GetAllArenaByGameIdService(2);
+        List<Informations> arenaList = getArenaService.execute();
+        
+        for(Informations arena : arenaList){
+            System.out.println(arena.getArenaName());
+        }
+        
+        DbConn.getInstance().close();
     }
 
     private static void testCreateNewSeasonService() {
-        
+        CreateNewSeasonService season = new CreateNewSeasonService(2, "name");
+        season.execute();
     }
-
-
 }
