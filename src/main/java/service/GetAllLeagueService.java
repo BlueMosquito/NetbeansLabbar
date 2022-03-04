@@ -14,7 +14,6 @@ import java.util.List;
 public class GetAllLeagueService {
     public List<Leagues> execute(){
         Leagues league = new Leagues();
-       
         return league.getAllLeagues();
     }
 }

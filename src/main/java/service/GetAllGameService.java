@@ -6,8 +6,6 @@ package service;
 
 import domain.Games;
 import java.util.List;
-import java.util.stream.Collectors;
-import records.GamesRecord;
 
 /**
  *
@@ -15,9 +13,7 @@ import records.GamesRecord;
  */
 public class GetAllGameService {
     public List<Games> execute(){
-        
-        List<GamesRecord> gameRecordList = GamesRecord.findAll();
-
-        return gameRecordList.stream().map((r)-> new Games(r)).collect(Collectors.toList());
+        Games game = new Games();
+        return game.getAllGames();
     }
 }

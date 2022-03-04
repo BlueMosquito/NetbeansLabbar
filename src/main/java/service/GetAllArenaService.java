@@ -4,12 +4,9 @@
  */
 package service;
 
-import db.DbConn;
 import domain.Informations;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import records.InformationsRecord;
+
 
 /**
  *
@@ -17,10 +14,7 @@ import records.InformationsRecord;
  */
 public class GetAllArenaService {
     public List<Informations> execute(){
-        
-        List<InformationsRecord> arenaRecordList = InformationsRecord.findAll();
-        
-        return arenaRecordList.stream().map((r)-> new Informations(r)).collect(Collectors.toList());
- 
+       Informations information = new Informations();
+       return information.getAllArena();
     }
 }

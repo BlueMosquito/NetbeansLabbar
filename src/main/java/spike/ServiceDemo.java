@@ -27,14 +27,15 @@ import service.GetAllArenaByGameIdService;
 public class ServiceDemo {
 
     public static void main(String[] args) {
-        testGetAllLeagueService();
+        
+        //testGetAllLeagueService();
         //testGetAllSeasonService();
         //testGetAllGameService();
         //testGetAllTeamService();
         //testGetAllArenaService();
         //testGetAllSeasonByLeagueIdService();
         //testGetAllArenaByGameIdService();
-        //testCreateNewSeasonService();
+        testCreateNewSeasonService();
         
     }
     
@@ -75,6 +76,7 @@ public class ServiceDemo {
     }
 
     private static void testGetAllTeamService() {
+        DbConn.getInstance().open();
         GetAllTeamService getAllTeamService = new GetAllTeamService();
         
         List<Teams> teamList = getAllTeamService.execute();
@@ -82,6 +84,7 @@ public class ServiceDemo {
         for(Teams team : teamList){
             System.out.println(team.getTeamName());
         }
+        DbConn.getInstance().close();
     }
 
     private static void testGetAllArenaService() {
@@ -98,7 +101,7 @@ public class ServiceDemo {
 
     private static void testGetAllSeasonByLeagueIdService() {
         DbConn.getInstance().open();
-        GetAllSeasonByLeagueIdService getSeasonService = new GetAllSeasonByLeagueIdService();
+        GetAllSeasonByLeagueIdService getSeasonService = new GetAllSeasonByLeagueIdService(1);
         
         List<Seasons> seasonList = getSeasonService.execute();
         
@@ -122,7 +125,9 @@ public class ServiceDemo {
     }
 
     private static void testCreateNewSeasonService() {
-        CreateNewSeasonService season = new CreateNewSeasonService(2, "name");
+        DbConn.getInstance().open();
+        CreateNewSeasonService season = new CreateNewSeasonService(23, "blaablaa");
         season.execute();
+        DbConn.getInstance().close();
     }
 }

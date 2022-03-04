@@ -4,6 +4,8 @@
  */
 package domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import records.TeamsRecord;
 
 /**
@@ -27,5 +29,10 @@ public class Teams {
     }
     public String getTeamName(){
         return theR.getString("teamName");
+    }
+    
+    public List <Teams> getAllTeams(){
+        List<TeamsRecord> teamRecordList = TeamsRecord.findAll();
+        return teamRecordList.stream().map((r)-> new Teams(r)).collect(Collectors.toList());
     }
 }

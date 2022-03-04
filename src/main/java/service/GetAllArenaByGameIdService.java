@@ -6,8 +6,6 @@ package service;
 
 import domain.Informations;
 import java.util.List;
-import java.util.stream.Collectors;
-import records.InformationsRecord;
 
 /**
  *
@@ -15,16 +13,14 @@ import records.InformationsRecord;
  */
 public class GetAllArenaByGameIdService {
     
-    int gameId;
+    long gameId;
 
-    public GetAllArenaByGameIdService(int gameId) {
+    public GetAllArenaByGameIdService(long gameId) {
         this.gameId = gameId;
     }
     
     public List<Informations> execute() {
-
-        List<InformationsRecord> gamesRecordList = InformationsRecord.find("game_id = ?", gameId);
-        
-        return gamesRecordList.stream().map((r)-> new Informations(r)).collect(Collectors.toList());
+        Informations season = new Informations();
+        return season.getAllArenaById(gameId);
     }
 }

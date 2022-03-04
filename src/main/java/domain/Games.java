@@ -4,6 +4,8 @@
  */
 package domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import records.GamesRecord;
 
 /**
@@ -28,5 +30,10 @@ public class Games {
    
    public String getGameName(){
        return theR.getString("gameName");
-   }  
+   }
+   
+   public List <Games> getAllGames(){
+        List<GamesRecord> gameRecordList = GamesRecord.findAll();
+        return gameRecordList.stream().map((r)-> new Games(r)).collect(Collectors.toList());
+    } 
 }

@@ -25,18 +25,7 @@ public class CreateNewSeasonService {
     
     
     public void execute(){
-        
-        DbConn.getInstance().open();
-        
-        SeasonsRecord record = new SeasonsRecord();
-        record.set("league_id", leage);
-        record.set("seasonName", name);
-        record.saveIt();
-        
-        System.out.println(leage + name);
-        
-        DbConn.getInstance().close();
-        
-        //return record;
+        Seasons season = new Seasons();
+        season.createNewSeason(leage, name);
     }
 }

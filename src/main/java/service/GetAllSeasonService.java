@@ -6,8 +6,6 @@ package service;
 
 import domain.Seasons;
 import java.util.List;
-import java.util.stream.Collectors;
-import records.SeasonsRecord;
 
 /**
  *
@@ -16,12 +14,8 @@ import records.SeasonsRecord;
 public class GetAllSeasonService {
 
     public List<Seasons> execute() {
-        
-        
-        List<SeasonsRecord> seasonRecordList = SeasonsRecord.findAll();
-        
-        return seasonRecordList.stream().map((r)-> new Seasons(r)).collect(Collectors.toList());
-        
+        Seasons season = new Seasons();
+        return season.getAllSeasons();
     }
 
 }

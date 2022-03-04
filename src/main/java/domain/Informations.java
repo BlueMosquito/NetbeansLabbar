@@ -4,6 +4,8 @@
  */
 package domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import records.InformationsRecord;
 
 /**
@@ -32,6 +34,16 @@ public class Informations {
    
    public String getArenaName(){
        return theR.getString("arena");
+   }
+   
+   public List<Informations> getAllArena(){
+        List<InformationsRecord> informationRecordList = InformationsRecord.findAll();
+        return informationRecordList.stream().map((r)-> new Informations(r)).collect(Collectors.toList());
+   }
+   
+   public List<Informations> getAllArenaById(long gameId){
+        List<InformationsRecord> informationRecordList = InformationsRecord.findAll();
+        return informationRecordList.stream().map((r)-> new Informations(r)).collect(Collectors.toList());
    }
     
 }

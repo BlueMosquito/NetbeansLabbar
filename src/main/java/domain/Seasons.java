@@ -4,6 +4,8 @@
  */
 package domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import records.SeasonsRecord;
 
 /**
@@ -11,6 +13,9 @@ import records.SeasonsRecord;
  * @author hamednajafi
  */
 public class Seasons {
+    
+    long seasonId, leagueId;
+    String name;
     
     private final SeasonsRecord theR;
     
@@ -28,6 +33,29 @@ public class Seasons {
     
     public Integer getLeagueId(){
         return theR.getInteger("league_id");
+    }
+    
+    public List<Seasons> getAllSeasons(){
+        List<SeasonsRecord> seasonRecordList = SeasonsRecord.findAll();
+        return seasonRecordList.stream().map((r)-> new Seasons(r)).collect(Collectors.toList());
+    }
+    
+    public List<Seasons> getSeasonsById(long seasonId){
+        this.seasonId = seasonId;
+        List<SeasonsRecord> seasonRecordList = SeasonsRecord.find("league_id = ?", seasonId);
+        return seasonRecordList.stream().map((r)-> new Seasons(r)).collect(Collectors.toList());
+    }
+    
+    public void createNewSeason(long leagueId, String name){
+        this.leagueId = leagueId;
+        this.name = name;
+        
+        SeasonsRecord record = new SeasonsRecord();
+        record.set("league_id", leagueId);
+        record.set("seasonName", name);
+        record.saveIt();
+        
+        System.out.println(leagueId + name);
     }
     
 }
