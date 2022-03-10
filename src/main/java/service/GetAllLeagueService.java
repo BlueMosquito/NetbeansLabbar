@@ -4,6 +4,7 @@
  */
 package service;
 
+import db.DbConn;
 import domain.Leagues;
 import java.util.List;
 
@@ -15,5 +16,9 @@ public class GetAllLeagueService {
     public List<Leagues> execute(){
         Leagues league = new Leagues();
         return league.getAllLeagues();
+    }
+    
+    public void init(DbConn dbConn, BrokerFactory brokerFactory){
+        
     }
 }
