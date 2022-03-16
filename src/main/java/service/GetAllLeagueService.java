@@ -6,6 +6,8 @@ package service;
 
 import db.DbConn;
 import domain.Leagues;
+import exception.ExceptionClass;
+import factory.BrokerFactory;
 import java.util.List;
 
 /**
@@ -13,12 +15,28 @@ import java.util.List;
  * @author hamednajafi
  */
 public class GetAllLeagueService {
-    public List<Leagues> execute(){
-        Leagues league = new Leagues();
-        return league.getAllLeagues();
+
+    private DbConn dbConn;
+    private BrokerFactory brokerFactory;
+    long leagueId;
+
+    public GetAllLeagueService() {
+
     }
-    
-    public void init(DbConn dbConn, BrokerFactory brokerFactory){
-        
+
+    public void init(DbConn dbConn, BrokerFactory brokerFactory) {
+        this.dbConn = dbConn;
+        this.brokerFactory = brokerFactory;
+    }
+
+    public List<Leagues> execute() {
+        this.dbConn.open();
+        List<Leagues> league = brokerFactory.getLeagueFactory().findAll();
+
+        if (league == null) {
+            System.out.println("Nothing there!!!");
+        }
+        this.dbConn.close();
+        return league;
     }
 }

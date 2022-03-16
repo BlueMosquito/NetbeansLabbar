@@ -4,7 +4,9 @@
  */
 package service;
 
+import db.DbConn;
 import domain.Seasons;
+import factory.BrokerFactory;
 
 /**
  *
@@ -12,17 +14,29 @@ import domain.Seasons;
  */
 public class CreateNewSeasonService {
     
-    private long leage;
-    private String name;
+    private DbConn dbConn;
+    private BrokerFactory brokerFactory;
+    private final long leageId;
+    private final String name;
 
-    public CreateNewSeasonService(long leage, String name) {
-        this.leage = leage;
+    public CreateNewSeasonService(long leageId, String name) {
+        this.leageId = leageId;
         this.name = name;
     }
     
+    public void init(DbConn dbConn, BrokerFactory brokerFactory){
+        this.dbConn = dbConn;
+        this.brokerFactory = brokerFactory;
+    }
     
-    public void execute(){
-        Seasons season = new Seasons();
-        season.createNewSeason(leage, name);
+    public Seasons execute(){
+        
+        this.dbConn.open();
+        
+        Seasons season = brokerFactory.getSeasonFactory()
+                .createNewSeason(leageId, name);
+
+        this.dbConn.close();
+        return season;
     }
 }

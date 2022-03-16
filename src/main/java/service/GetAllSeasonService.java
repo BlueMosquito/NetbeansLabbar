@@ -4,7 +4,9 @@
  */
 package service;
 
+import db.DbConn;
 import domain.Seasons;
+import factory.BrokerFactory;
 import java.util.List;
 
 /**
@@ -12,10 +14,28 @@ import java.util.List;
  * @author hamednajafi
  */
 public class GetAllSeasonService {
-
-    public List<Seasons> execute() {
-        Seasons season = new Seasons();
-        return season.getAllSeasons();
+    private DbConn dbConn;
+    private BrokerFactory brokerFactory;
+    long seasonId;
+    
+    public GetAllSeasonService() {
+    }
+    
+    public void init(DbConn dbConn, BrokerFactory brokerFactory){
+        this.dbConn = dbConn;
+        this.brokerFactory = brokerFactory;
     }
 
+    public List<Seasons> execute() {
+        
+        this.dbConn.open();
+        List<Seasons> season = brokerFactory.getSeasonFactory()
+                .findAllSeasonByLeagueId(seasonId);
+        
+        if (season == null) {
+            System.out.println("Nothing there!!!");
+        }
+        this.dbConn.close();
+        return season;
+    }
 }

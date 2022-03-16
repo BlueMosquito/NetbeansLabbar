@@ -24,8 +24,8 @@ public class LeagueBroker {
         return new Leagues(LeaguesRecord.findById(leagueId));
     }
     
-    public Leagues create(String leagueName){
-        LeaguesRecord record = new LeaguesRecord().set("leagueName", leagueName);
+    public Leagues create(String name){
+        LeaguesRecord record = new LeaguesRecord().set("leagueName", name);
         record.saveIt();
         return new Leagues(record);
     }

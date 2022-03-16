@@ -54,8 +54,6 @@ public class Seasons {
         record.set("league_id", leagueId);
         record.set("seasonName", name);
         record.saveIt();
-        
-        System.out.println(leagueId + name);
     }
     
 }

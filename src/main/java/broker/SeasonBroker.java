@@ -14,10 +14,37 @@ import records.SeasonsRecord;
  * @author hamednajafi
  */
 public class SeasonBroker {
+    
+    long seasonId, leagueId;
+    String name;
+    
     public List<Seasons> findAll(){
         return SeasonsRecord.findAll().stream()
                 .map(rec -> new Seasons((SeasonsRecord) rec))
                 .collect(Collectors.toList());
+    }
+
+    public Seasons findById(long seasonId){
+        return new Seasons(SeasonsRecord.findById(seasonId));
+    }
+    
+    public List<Seasons> findAllSeasonByLeagueId(long leagueId){
+        List<SeasonsRecord> seasonR = SeasonsRecord.findById(leagueId);
+        return seasonR.stream().map(rec -> new Seasons((SeasonsRecord) rec))
+                .collect(Collectors.toList());
+    }
+    
+    public Seasons createNewSeason(long leagueId, String name){
+        this.leagueId = leagueId;
+        this.name = name;
+        
+        SeasonsRecord record = new SeasonsRecord();
+        record.set("league_id", leagueId);
+        record.set("seasonName", name);
+        record.saveIt();
+        
+        Seasons season = new Seasons(record);
+        return season;
     }
     
 }
