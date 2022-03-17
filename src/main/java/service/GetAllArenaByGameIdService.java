@@ -4,7 +4,9 @@
  */
 package service;
 
+import db.DbConn;
 import domain.Informations;
+import factory.BrokerFactory;
 import java.util.List;
 
 /**
@@ -14,13 +16,30 @@ import java.util.List;
 public class GetAllArenaByGameIdService {
     
     long gameId;
+    private DbConn dbConn;
+    private BrokerFactory brokerFactory;
 
     public GetAllArenaByGameIdService(long gameId) {
         this.gameId = gameId;
     }
     
-    public List<Informations> execute() {
-        Informations season = new Informations();
-        return season.getAllArenaById(gameId);
+    public void init(DbConn dbConn, BrokerFactory brokerFactory) {
+        this.dbConn = dbConn;
+        this.brokerFactory = brokerFactory;
+    }
+    
+    public Informations execute() {
+        //Informations season = new Informations();
+        //return season.getAllArenaById(gameId);
+        
+        this.dbConn.open();
+        Informations info = brokerFactory.getInfoFactory().findById(gameId);
+
+        if (info == null) {
+            System.out.println("Nothing there!!!");
+        }
+        
+        this.dbConn.close();
+        return info;
     }
 }

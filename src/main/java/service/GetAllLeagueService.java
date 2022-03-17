@@ -6,7 +6,6 @@ package service;
 
 import db.DbConn;
 import domain.Leagues;
-import exception.ExceptionClass;
 import factory.BrokerFactory;
 import java.util.List;
 
@@ -21,7 +20,6 @@ public class GetAllLeagueService {
     long leagueId;
 
     public GetAllLeagueService() {
-
     }
 
     public void init(DbConn dbConn, BrokerFactory brokerFactory) {
@@ -36,6 +34,7 @@ public class GetAllLeagueService {
         if (league == null) {
             System.out.println("Nothing there!!!");
         }
+        
         this.dbConn.close();
         return league;
     }

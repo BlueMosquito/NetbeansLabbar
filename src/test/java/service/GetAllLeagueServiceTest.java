@@ -50,8 +50,9 @@ public class GetAllLeagueServiceTest {
     private BrokerFactory getMockedBrokerFactoryWithBrokersSetup() { 
         BrokerFactory brokerFactory = getMockedBrokerFactory();
         Leagues league = mock(Leagues.class);
+        List<Leagues> leagueList = league.getAllLeagues();
         LeagueBroker leagueBroker = mock(LeagueBroker.class);
-        when(leagueBroker.findById(1)).thenReturn(league);
+        when(leagueBroker.findAll()).thenReturn(leagueList);
         return brokerFactory;
     }
     

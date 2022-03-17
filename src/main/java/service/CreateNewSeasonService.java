@@ -32,11 +32,11 @@ public class CreateNewSeasonService {
     public Seasons execute(){
         
         this.dbConn.open();
-        
         Seasons season = brokerFactory.getSeasonFactory()
                 .createNewSeason(leageId, name);
-
+        
         this.dbConn.close();
         return season;
     }
+    
 }

@@ -111,18 +111,18 @@ public class ServiceDemo {
         DbConn.getInstance().close();
     }
 
-    private static void testGetAllArenaByGameIdService() {
-        DbConn.getInstance().open();
-        
-        GetAllArenaByGameIdService getArenaService = new GetAllArenaByGameIdService(2);
-        List<Informations> arenaList = getArenaService.execute();
-        
-        for(Informations arena : arenaList){
-            System.out.println(arena.getArenaName());
-        }
-        
-        DbConn.getInstance().close();
-    }
+//    private static void testGetAllArenaByGameIdService() {
+//        DbConn.getInstance().open();
+//        
+//        GetAllArenaByGameIdService getArenaService = new GetAllArenaByGameIdService(2);
+//        List<Informations> arenaList = getArenaService.execute();
+//        
+//        for(Informations arena : arenaList){
+//            System.out.println(arena.getArenaName());
+//        }
+//        
+//        DbConn.getInstance().close();
+//    }
 
     private static void testCreateNewSeasonService() {
         DbConn.getInstance().open();

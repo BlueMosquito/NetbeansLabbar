@@ -9,6 +9,7 @@ import db.DbConn;
 import domain.Seasons;
 import exception.ExceptionClass;
 import factory.BrokerFactory;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -18,52 +19,40 @@ import static org.mockito.Mockito.when;
  *
  * @author hamednajafi
  */
-public class CreateNewSeasonServiceTest {
-
-    public CreateNewSeasonServiceTest() {
-    }
-
-    @Test
-    public void testShoulNotAcceptinNonExistingIdAndNotUsingUsedName() {
-        String name = "SeasonNr1", expResult = "";
-        long leagueId = 1, expId = 1;
-        
-        new CreateNewSeasonService(leagueId, name);
-        //fail("Should throw exception");
-        assertNotEquals(expResult, name);
-        assertEquals(expId, leagueId);
+public class GetAllSeasonServiceTest {
+    
+    public GetAllSeasonServiceTest() {
     }
 
     /**
-     * Test of testShoulCreateSeasonIfNotExisting method, of class
-     * CreateNewSeasonService.
+     * Test of execute method, of class GetAllSeasonByLeagueIdService.
      */
     @Test
-    public void testShoulCreateSeasonIfNotExisting() {
-        CreateNewSeasonService service = new CreateNewSeasonService(1, "blabla");
+    public void testShouldAcceptExistingSeason() {
+        GetAllSeasonService service = new GetAllSeasonService();
         BrokerFactory brokerFactory = getMockedBrokerFactoryWithBrokersSetup();
         DbConn conn = mock(DbConn.class);
         service.init(conn, brokerFactory);
-        try {
-            service.execute();
-        } catch (ExceptionClass ex) {
-            fail("Should not throw");
+        try { 
+            service.execute(); 
+        } catch (ExceptionClass ex) { 
+            fail("Should not throw"); 
         }
     }
-
+    
     private BrokerFactory getMockedBrokerFactory() {
         SeasonBroker seasonBroker = mock(SeasonBroker.class);
         BrokerFactory brokerFactory = mock(BrokerFactory.class);
         when(brokerFactory.getSeasonFactory()).thenReturn(seasonBroker);
         return brokerFactory;
     }
-
-    private BrokerFactory getMockedBrokerFactoryWithBrokersSetup() {
+    
+    private BrokerFactory getMockedBrokerFactoryWithBrokersSetup() { 
         BrokerFactory brokerFactory = getMockedBrokerFactory();
         Seasons season = mock(Seasons.class);
+        List<Seasons> seasonList = season.getAllSeasons();
         SeasonBroker seasonBroker = mock(SeasonBroker.class);
-        when(seasonBroker.findById(1)).thenReturn(season);
+        when(seasonBroker.findAll()).thenReturn(seasonList);
         return brokerFactory;
     }
-
 }

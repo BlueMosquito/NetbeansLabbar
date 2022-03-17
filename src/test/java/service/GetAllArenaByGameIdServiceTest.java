@@ -4,9 +4,9 @@
  */
 package service;
 
-import broker.SeasonBroker;
+import broker.InformationBroker;
 import db.DbConn;
-import domain.Seasons;
+import domain.Informations;
 import exception.ExceptionClass;
 import factory.BrokerFactory;
 import java.util.List;
@@ -19,17 +19,17 @@ import static org.mockito.Mockito.when;
  *
  * @author hamednajafi
  */
-public class GetAllSeasonTest {
+public class GetAllArenaByGameIdServiceTest {
     
-    public GetAllSeasonTest() {
+    public GetAllArenaByGameIdServiceTest() {
     }
 
     /**
-     * Test of execute method, of class GetAllSeasonByLeagueIdService.
+     * Test of execute method, of class GetAllArenaByGameIdService.
      */
     @Test
-    public void testShouldAcceptExistingSeason() {
-        GetAllSeasonService service = new GetAllSeasonService();
+    public void testShouldGetAllArena() {
+        GetAllArenaByGameIdService service = new GetAllArenaByGameIdService(1);
         BrokerFactory brokerFactory = getMockedBrokerFactoryWithBrokersSetup();
         DbConn conn = mock(DbConn.class);
         service.init(conn, brokerFactory);
@@ -41,17 +41,19 @@ public class GetAllSeasonTest {
     }
     
     private BrokerFactory getMockedBrokerFactory() {
-        SeasonBroker seasonBroker = mock(SeasonBroker.class);
+        InformationBroker infoBroker = mock(InformationBroker.class);
         BrokerFactory brokerFactory = mock(BrokerFactory.class);
-        when(brokerFactory.getSeasonFactory()).thenReturn(seasonBroker);
+        when(brokerFactory.getInfoFactory()).thenReturn(infoBroker);
         return brokerFactory;
     }
     
     private BrokerFactory getMockedBrokerFactoryWithBrokersSetup() { 
         BrokerFactory brokerFactory = getMockedBrokerFactory();
-        Seasons season = mock(Seasons.class);
-        SeasonBroker seasonBroker = mock(SeasonBroker.class);
-        when(seasonBroker.findById(1)).thenReturn(season);
+        Informations info = mock(Informations.class);
+        List<Informations> arenaList = info.getAllArenaById(1);
+        InformationBroker infoBroker = mock(InformationBroker.class);
+        when(infoBroker.findById(1)).thenReturn(info);
         return brokerFactory;
     }
+    
 }
