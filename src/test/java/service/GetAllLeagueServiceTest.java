@@ -32,7 +32,7 @@ public class GetAllLeagueServiceTest {
         GetAllLeagueService service = new GetAllLeagueService();
         BrokerFactory brokerFactory = getMockedBrokerFactoryWithBrokersSetup();
         DbConn conn = mock(DbConn.class);
-        service.init(conn, brokerFactory);
+        service.init(brokerFactory);
         try { 
             service.execute(); 
         } catch (ExceptionClass ex) { 

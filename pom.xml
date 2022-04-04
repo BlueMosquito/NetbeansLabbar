@@ -42,21 +42,21 @@
         </dependency>
     </dependencies>
     <build>
-        <plugins> 
-            <plugin> 
-                <groupId>org.javalite</groupId> 
-                <artifactId>activejdbc-instrumentation</artifactId> 
-                <version>3.0-j11</version> 
-                <executions> 
-                    <execution> 
-                        <phase>process-classes</phase> 
+        <plugins>
+            <plugin>
+                <groupId>org.javalite</groupId>
+                <artifactId>activejdbc-instrumentation</artifactId>
+                <version>3.0-j11</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
                         <goals> 
-                            <goal>instrument</goal> 
+                            <goal>instrument</goal>
                         </goals>
-                    </execution> 
-                </executions> 
+                    </execution>
+                </executions>
             </plugin>
-        </plugins> 
+        </plugins>
     </build>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

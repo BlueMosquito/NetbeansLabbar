@@ -4,6 +4,7 @@
  */
 package spike;
 
+import service.ServiceRunner;
 import db.DbConn;
 import domain.Games;
 import domain.Informations;
@@ -11,6 +12,7 @@ import domain.Leagues;
 import domain.Seasons;
 import domain.Teams;
 import java.util.List;
+import java.util.stream.Stream;
 import service.CreateNewSeasonService;
 import service.GetAllArenaService;
 import service.GetAllGameService;
@@ -28,27 +30,28 @@ public class ServiceDemo {
 
     public static void main(String[] args) {
         
-        //testGetAllLeagueService();
+        testGetAllLeagueService();
         //testGetAllSeasonService();
         //testGetAllGameService();
         //testGetAllTeamService();
         //testGetAllArenaService();
         //testGetAllSeasonByLeagueIdService();
         //testGetAllArenaByGameIdService();
-        testCreateNewSeasonService();
+        //testCreateNewSeasonService();
+        System.out.println(Stream.of(1,2,3,4,5,6,7,8,9)
+                .filter(n -> n % 2 > 0).reduce(Integer::sum));
         
     }
     
     public static void testGetAllLeagueService(){
-        DbConn.getInstance().open();
-        GetAllLeagueService getAllLeagueService = new GetAllLeagueService();
-
-        List<Leagues> leaguesList = getAllLeagueService.execute();
+        
+        ServiceRunner<List<Leagues>> runner = new ServiceRunner<>(new GetAllLeagueService());
+        
+        List<Leagues> leaguesList = runner.execute();
 
         for (Leagues league : leaguesList) {
             System.out.println(league.getName());
         }
-        DbConn.getInstance().close();
     }
 
     private static void testGetAllSeasonService() {

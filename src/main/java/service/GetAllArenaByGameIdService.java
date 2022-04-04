@@ -6,40 +6,29 @@ package service;
 
 import db.DbConn;
 import domain.Informations;
-import factory.BrokerFactory;
 import java.util.List;
 
 /**
  *
  * @author hamednajafi
  */
-public class GetAllArenaByGameIdService {
+public class GetAllArenaByGameIdService extends BaseService<List<Informations>>{
     
     long gameId;
-    private DbConn dbConn;
-    private BrokerFactory brokerFactory;
-
+    
     public GetAllArenaByGameIdService(long gameId) {
         this.gameId = gameId;
     }
     
-    public void init(DbConn dbConn, BrokerFactory brokerFactory) {
-        this.dbConn = dbConn;
-        this.brokerFactory = brokerFactory;
-    }
-    
-    public Informations execute() {
-        //Informations season = new Informations();
-        //return season.getAllArenaById(gameId);
+    @Override
+    public List<Informations> execute() {
         
-        this.dbConn.open();
-        Informations info = brokerFactory.getInfoFactory().findById(gameId);
-
+        List<Informations> info = getBrokerFactory().getInfoFactory().findAll();
+        
         if (info == null) {
             System.out.println("Nothing there!!!");
         }
         
-        this.dbConn.close();
         return info;
     }
 }

@@ -43,7 +43,7 @@ public class CreateNewSeasonServiceTest {
         CreateNewSeasonService service = new CreateNewSeasonService(1, "blabla");
         BrokerFactory brokerFactory = getMockedBrokerFactoryWithBrokersSetup();
         DbConn conn = mock(DbConn.class);
-        service.init(conn, brokerFactory);
+        service.init(brokerFactory);
         try {
             service.execute();
         } catch (ExceptionClass ex) {

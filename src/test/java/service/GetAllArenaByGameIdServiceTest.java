@@ -32,7 +32,7 @@ public class GetAllArenaByGameIdServiceTest {
         GetAllArenaByGameIdService service = new GetAllArenaByGameIdService(1);
         BrokerFactory brokerFactory = getMockedBrokerFactoryWithBrokersSetup();
         DbConn conn = mock(DbConn.class);
-        service.init(conn, brokerFactory);
+        service.init(brokerFactory);
         try { 
             service.execute(); 
         } catch (ExceptionClass ex) { 
