@@ -12,8 +12,10 @@ import java.util.List;
  * @author hamednajafi
  */
 public class GetAllTeamService {
+    
     public List<Teams> execute(){
         Teams team = new Teams();
         return team.getAllTeams();
+        
     }
 }

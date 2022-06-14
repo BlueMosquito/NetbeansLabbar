@@ -11,6 +11,7 @@ import java.util.List;
  *
  * @author hamednajafi
  */
+
 public class GetAllLeagueService extends BaseService<List<Leagues>>{
 
     long leagueId;

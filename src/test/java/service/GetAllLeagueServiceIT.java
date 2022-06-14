@@ -43,7 +43,7 @@ public class GetAllLeagueServiceIT {
      */
     @Test
     public void testExecute() {
-        ServiceRunner<List<Leagues>> runner = new ServiceRunner<>(new GetAllLeagueService());
+        GetAllLeagueService runner = new GetAllLeagueService();
         List<Leagues> leaguesList = runner.execute();
         assertEquals(leaguesList.get(0).getName(), "LeagueNr1");
     }

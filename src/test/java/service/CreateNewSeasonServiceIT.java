@@ -42,7 +42,7 @@ public class CreateNewSeasonServiceIT {
      */
     @Test
     public void testExecute() {
-        ServiceRunner runner = new ServiceRunner(new CreateNewSeasonService(3, "testSeason"));
+        CreateNewSeasonService runner = new CreateNewSeasonService(3, "testSeason");
         Seasons season = (Seasons) runner.execute();
         assertEquals("testSeason", "testSeason");
     }

@@ -43,8 +43,8 @@ public class GetAllArenaByGameIdServiceIT {
      */
     @Test
     public void testExecute() {
-        ServiceRunner runner = new ServiceRunner(new GetAllArenaByGameIdService(1));
-        List <Informations> info = (List <Informations>) runner.execute();
+        GetAllArenaByGameIdService runner = new GetAllArenaByGameIdService(1);
+        List <Informations> info = runner.execute();
         assertEquals(info.get(1).getArenaName(), "blablaArena");
     }
     

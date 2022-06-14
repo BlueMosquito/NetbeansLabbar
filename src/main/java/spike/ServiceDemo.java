@@ -45,7 +45,7 @@ public class ServiceDemo {
     
     public static void testGetAllLeagueService(){
         
-        ServiceRunner<List<Leagues>> runner = new ServiceRunner<>(new GetAllLeagueService());
+        GetAllLeagueService runner = new GetAllLeagueService();
         
         List<Leagues> leaguesList = runner.execute();
 
